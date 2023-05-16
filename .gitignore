@@ -228,6 +228,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/java,linux,macos,maven,windows,jetbrains
-*/.idea/
+/.idea/
 **/target/
 >>>>>>> d75c4958510a5ab1aaa71d125bb3bec434a917bd
