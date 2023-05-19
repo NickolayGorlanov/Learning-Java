@@ -1,33 +1,49 @@
 public class Basket {
+    private static int totalCount = 0;
+    private static int totalCost = 0;
 
-    private static int count = 0;
     private String items = "";
     private int totalPrice = 0;
-    private int limit;
+    private final int limit;
 
-    public Basket() {
-        increaseCount(1);
+    public Basket(int i) {
+        totalCount++;
         items = "Список товаров:";
         this.limit = 1000000;
     }
 
-    public Basket(int limit) {
-        this();
-        this.limit = limit;
+    public static int getTotalCount() {
+        return totalCount;
     }
 
-    public Basket(String items, int totalPrice) {
-        this();
-        this.items = this.items + items;
-        this.totalPrice = totalPrice;
+    public static int getTotalCost() {
+        return totalCost;
     }
 
-    public static int getCount() {
-        return count;
+    public static void increaseTotalCount(int count) {
+        totalCount += count;
     }
 
-    public static void increaseCount(int count) {
-        Basket.count = Basket.count + count;
+    public static void increaseTotalCost(int cost) {
+        totalCost += cost;
+    }
+
+    public static double getAverageItemCost() {
+        if (totalCount == 0) {
+            return 0;
+        }
+        return (double) totalCost / totalCount;
+    }
+
+    public static double getAverageBasketCost() {
+        if (totalCount == 0) {
+            return 0;
+        }
+        return (double) totalCost / getTotalBasketCount();
+    }
+
+    public static int getTotalBasketCount() {
+        return totalCount;
     }
 
     public void add(String name, int price) {
@@ -35,23 +51,22 @@ public class Basket {
     }
 
     public void add(String name, int price, int count) {
-        boolean error = false;
-        if (contains(name)) {
-            error = true;
-        }
+        boolean error = contains(name);
 
         if (totalPrice + count * price >= limit) {
             error = true;
         }
 
         if (error) {
-            System.out.println("Error occured :(");
+            System.out.println("Error occurred :(");
             return;
         }
 
         items = items + "\n" + name + " - " +
-            count + " шт. - " + price;
+                count + " шт. - " + price;
         totalPrice = totalPrice + count * price;
+        increaseTotalCount(count);
+        increaseTotalCost(count * price);
     }
 
     public void clear() {
