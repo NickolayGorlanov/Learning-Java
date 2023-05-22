@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5518c87 (Edited)
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -27,6 +30,7 @@ bin/
 .vscode/
 
 ### Mac OS ###
+<<<<<<< HEAD
 .DS_Store
 =======
 # Created by https://www.gitignore.io/api/java,linux,macos,maven,windows,jetbrains
@@ -231,3 +235,6 @@ $RECYCLE.BIN/
 /.idea/
 **/target/
 >>>>>>> d75c4958510a5ab1aaa71d125bb3bec434a917bd
+=======
+.DS_Store
+>>>>>>> 5518c87 (Edited)
