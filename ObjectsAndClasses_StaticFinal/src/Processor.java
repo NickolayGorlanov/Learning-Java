@@ -1,4 +1,7 @@
 public class Processor {
+    public enum ProcessorType {
+        INTEL, AMD, ARM
+    }
     private final String type;
     private final double frequency;
     private final int cores;

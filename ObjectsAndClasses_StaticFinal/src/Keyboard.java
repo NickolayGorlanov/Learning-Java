@@ -1,16 +1,19 @@
 public class Keyboard {
+    public enum KeyboardType {
+        MECHANICAL, MEMBRANE
+    }
     private final String type;
-    private final boolean backlight;
+    private final boolean hasBacklight;
     private final double weight;
 
-    public Keyboard(String type, boolean backlight, double weight) {
+    public Keyboard(String type, boolean hasBacklight, double weight) {
         this.type = type;
-        this.backlight = backlight;
+        this.hasBacklight = hasBacklight;
         this.weight = weight;
     }
 
     @Override
     public String toString() {
-        return "Type: " + type + ", Backlight: " + (backlight ? "Yes" : "No") + ", Weight: " + weight + " kg";
+        return "Type: " + type + ", Backlight: " + (hasBacklight ? "Yes" : "No") + ", Weight: " + weight + " kg";
     }
 }

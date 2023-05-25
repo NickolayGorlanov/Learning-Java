@@ -1,16 +1,22 @@
 public class Screen {
+    public enum MatrixType {
+        TN,
+        VA,
+        IPS
+    }
+
     private final double diagonal;
-    private final String type;
+    private final MatrixType matrixType;
     private final double weight;
 
-    public Screen(double diagonal, String type, double weight) {
+    public Screen(double diagonal, MatrixType matrixType, double weight) {
         this.diagonal = diagonal;
-        this.type = type;
+        this.matrixType = matrixType;
         this.weight = weight;
     }
 
     @Override
     public String toString() {
-        return "Diagonal: " + diagonal + " inches, Type: " + type + ", Weight: " + weight + " kg";
+        return "Diagonal: " + diagonal + " inches, Matrix Type: " + matrixType.name() + ", Weight: " + weight + " kg";
     }
 }

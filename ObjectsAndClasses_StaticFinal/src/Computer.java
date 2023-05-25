@@ -14,10 +14,10 @@ public class Computer {
     }
 
     public void printComputerDetails() {
-        System.out.println("Processor: " + processor);
-        System.out.println("Memory: " + memory);
-        System.out.println("Storage: " + storage);
-        System.out.println("Screen: " + screen);
-        System.out.println("Keyboard: " + keyboard);
+        System.out.println("Processor: " + processor.toString());
+        System.out.println("Memory: " + memory.toString());
+        System.out.println("Storage: " + storage.toString());
+        System.out.println("Screen: " + screen.toString());
+        System.out.println("Keyboard: " + keyboard.toString());
     }
 }
