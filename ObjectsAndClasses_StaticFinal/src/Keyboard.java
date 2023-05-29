@@ -1,7 +1,5 @@
 public class Keyboard {
-    public enum KeyboardType {
-        MECHANICAL, MEMBRANE
-    }
+
     private final String type;
     private final boolean hasBacklight;
     private final double weight;

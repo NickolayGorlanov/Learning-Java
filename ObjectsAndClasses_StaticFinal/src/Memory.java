@@ -1,7 +1,5 @@
 public class Memory {
-    public enum MemoryType {
-        DDR2, DDR3, DDR4
-    }
+
     private final String type;
     private final int capacity;
     private final double weight;

@@ -1,7 +1,5 @@
 public class Storage {
-    public enum StorageType {
-        HDD, SSD, NVMe
-    }
+
     private final String type;
     private final int capacity;
     private final double weight;

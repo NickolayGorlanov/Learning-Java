@@ -1,9 +1,4 @@
 public class Screen {
-    public enum MatrixType {
-        TN,
-        VA,
-        IPS
-    }
 
     private final double diagonal;
     private final MatrixType matrixType;
