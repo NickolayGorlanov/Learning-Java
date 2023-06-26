@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 5518c87 (Edited)
+=======
+>>>>>>> d502f2a (modified)
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -30,6 +33,7 @@ bin/
 .vscode/
 
 ### Mac OS ###
+<<<<<<< HEAD
 <<<<<<< HEAD
 .DS_Store
 =======
@@ -238,3 +242,6 @@ $RECYCLE.BIN/
 =======
 .DS_Store
 >>>>>>> 5518c87 (Edited)
+=======
+.DS_Store
+>>>>>>> d502f2a (modified)
