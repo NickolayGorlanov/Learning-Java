@@ -1,30 +1,19 @@
+
+
 import java.util.Random;
 
 public class TopManager implements Employee {
     private final int baseSalary;
-    private Company company;
+    private final Company company;
 
     public TopManager(Company company) {
         Random random = new Random();
-        this.baseSalary = random.nextInt(150_000) + 100_000; // Зарплата от 100,000 до 249,999 руб.
+        this.baseSalary = random.nextInt(150000) + 100000;
         this.company = company;
     }
 
-    @Override
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    @Override
-    public Company getCompany() {
-        return null;
-    }
 
     public int getMonthSalary() {
-        if (company.getIncome() > 10_000_000) {
-            return baseSalary + (int) (baseSalary * 1.5); // Зарплата с бонусом
-        } else {
-            return baseSalary;
-        }
+        return this.company.getIncome() > 10000000 ? this.baseSalary + (int) ((double) this.baseSalary * 1.5) : this.baseSalary;
     }
 }
