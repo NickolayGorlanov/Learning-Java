@@ -1,5 +1,4 @@
 
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,15 +11,15 @@ public class Main {
 
         int i;
         for (i = 0; i < 180; ++i) {
-            company1.hire(new Operator(company1));
+            company1.hire(new Operator());
         }
 
         for (i = 0; i < 80; ++i) {
-            company1.hire(new Manager(company1));
+            company1.hire(new Manager());
         }
 
         for (i = 0; i < 10; ++i) {
-            company1.hire(new TopManager(company1));
+            company1.hire(new TopManager());
         }
 
         List<Employee> topSalaryStaff1 = company1.getTopSalaryStaff(15);
@@ -45,15 +44,15 @@ public class Main {
 
         int k;
         for (k = 0; k < 200; ++k) {
-            company2.hire(new Operator(company2));
+            company2.hire(new Operator());
         }
 
         for (k = 0; k < 100; ++k) {
-            company2.hire(new Manager(company2));
+            company2.hire(new Manager());
         }
 
         for (k = 0; k < 20; ++k) {
-            company2.hire(new TopManager(company2));
+            company2.hire(new TopManager());
         }
 
         List<Employee> topSalaryStaff2 = company2.getTopSalaryStaff(15);

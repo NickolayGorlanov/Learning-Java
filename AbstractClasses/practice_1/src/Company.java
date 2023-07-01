@@ -1,11 +1,15 @@
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 public class Company {
     private List<Employee> employees;
     private int income;
 
     public Company() {
-        this.employees = new ArrayList<>();
+        this.employees = new ArrayList();
         this.income = 0;
     }
 
@@ -15,7 +19,7 @@ public class Company {
     }
 
     public void hire(Employee employee) {
-        employees.add(employee);
+        this.employees.add(employee);
     }
 
     public void hireAll(Collection<Employee> employees) {
@@ -23,35 +27,34 @@ public class Company {
     }
 
     public void fire(Employee employee) {
-        employees.remove(employee);
+        this.employees.remove(employee);
     }
 
     public int getIncome() {
-        return income;
+        return this.income;
     }
 
     public List<Employee> getEmployees() {
-        return employees;
+        return this.employees;
     }
 
     public List<Employee> getTopSalaryStaff(int count) {
-        if (count < 0 || count > employees.size()) {
+        if (count >= 0 && count <= this.employees.size()) {
+            List<Employee> sortedEmployees = new ArrayList(this.employees);
+            sortedEmployees.sort(Comparator.comparingInt(Employee::getMonthSalary).reversed());
+            return sortedEmployees.subList(0, count);
+        } else {
             throw new IllegalArgumentException("Invalid count value");
         }
-        List<Employee> sortedEmployees = new ArrayList<>(employees);
-        sortedEmployees.sort(Comparator.comparingInt(Employee::getMonthSalary).reversed());
-        return sortedEmployees.subList(0, count);
     }
 
     public List<Employee> getLowestSalaryStaff(int count) {
-        if (count < 0 || count > employees.size()) {
+        if (count >= 0 && count <= this.employees.size()) {
+            List<Employee> sortedEmployees = new ArrayList(this.employees);
+            sortedEmployees.sort(Comparator.comparingInt(Employee::getMonthSalary));
+            return sortedEmployees.subList(0, count);
+        } else {
             throw new IllegalArgumentException("Invalid count value");
         }
-        List<Employee> sortedEmployees = new ArrayList<>(employees);
-        sortedEmployees.sort(Comparator.comparingInt(Employee::getMonthSalary));
-        return sortedEmployees.subList(0, count);
     }
 }
-
-
-
