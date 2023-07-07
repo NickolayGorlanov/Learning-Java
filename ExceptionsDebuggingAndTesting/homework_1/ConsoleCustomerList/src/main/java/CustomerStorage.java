@@ -63,8 +63,7 @@ public class CustomerStorage {
 
     private boolean isValidPhoneNumber(String phoneNumber) {
         // Проверка формата телефонного номера
-        // Ваша логика проверки телефонного номера здесь
-        if (phoneNumber.matches("\\+\\d{11}")) {
+         if (phoneNumber.matches("\\+\\d{11}")) {
             return true;  // Верный формат
         } else {
             LOGGER.error("Invalid phone number format: {}", phoneNumber);
@@ -74,7 +73,7 @@ public class CustomerStorage {
 
     private boolean isValidEmail(String email) {
         // Проверка формата email
-        // Ваша логика проверки email здесь
+
         if (email.matches("[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")) {
             return true;  // Верный формат
         } else {
@@ -84,7 +83,7 @@ public class CustomerStorage {
     }
 
 
-    // Custom exception classes
+
 
     public static class InvalidDataFormatException extends RuntimeException {
         public InvalidDataFormatException(String message) {
