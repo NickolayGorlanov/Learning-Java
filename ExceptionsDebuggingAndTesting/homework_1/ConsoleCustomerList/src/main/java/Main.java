@@ -13,8 +13,6 @@ public class Main {
     private static final String HELP_TEXT = "Command examples:\n" + COMMAND_EXAMPLES;
 
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
-    public static final Logger ERRORS_LOGGER = LogManager.getLogger("ErrorsLogger");
-    public static final Logger QUERIES_LOGGER = LogManager.getLogger("QueriesLogger");
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,14 +25,14 @@ public class Main {
                 String command = scanner.nextLine();
                 String[] tokens = command.split("\\s+", 2);
 
-                QUERIES_LOGGER.info("Command: {}", command);
+                LOGGER.info("Command: {}", command);
 
                 if (tokens[0].equals("add")) {
                     try {
                         executor.addCustomer(tokens[1]);
                     } catch (CustomerStorage.InvalidDataFormatException | CustomerStorage.InvalidPhoneNumberException | CustomerStorage.InvalidEmailException e) {
                         System.err.println("An error occurred: " + e.getMessage());
-                        ERRORS_LOGGER.error("Error adding customer: {}", e.getMessage());
+                        LOGGER.error("Error adding customer: {}", e.getMessage());
                     }
                 } else if (tokens[0].equals("list")) {
                     executor.listCustomers();
@@ -48,11 +46,11 @@ public class Main {
                     break; // Выход из цикла при вводе команды "exit"
                 } else {
                     System.out.println(COMMAND_ERROR);
-                    ERRORS_LOGGER.error("Invalid command: {}", command);
+                    LOGGER.error("Invalid command: {}", command);
                 }
             } catch (RuntimeException e) {
                 System.err.println("An error occurred: " + e.getMessage());
-                ERRORS_LOGGER.error("Error executing command: {}", e.getMessage());
+                LOGGER.error("Error executing command: {}", e.getMessage());
             }
         }
 

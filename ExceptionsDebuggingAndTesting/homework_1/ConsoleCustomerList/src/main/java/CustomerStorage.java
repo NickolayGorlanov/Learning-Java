@@ -38,7 +38,7 @@ public class CustomerStorage {
             }
 
             storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
-            LOGGER.info("Customer '{}' added successfully.");
+            LOGGER.info("Customer '{}' added successfully.", name);
         } catch (InvalidDataFormatException | InvalidPhoneNumberException | InvalidEmailException e) {
             LOGGER.error("Error adding customer: {}", e.getMessage());
             throw e;
