@@ -16,6 +16,8 @@ public class Line implements Comparable<Line>
         stations = new ArrayList<>();
     }
 
+
+
     public int getNumber()
     {
         return number;

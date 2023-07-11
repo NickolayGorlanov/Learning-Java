@@ -1,15 +1,11 @@
 import org.junit.jupiter.api.Assertions;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Station;
-
 import core.Line;
-
-
 
 public class RouteCalculatorTest {
     private RouteCalculator calculator;
@@ -28,7 +24,7 @@ public class RouteCalculatorTest {
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
-        Assertions.assertEquals(3, route.size());
+        assertEquals(3, route.size());
         assertEquals(from, route.get(0));
         assertEquals(new Station("Station 2", line1), route.get(1));
         assertEquals(to, route.get(2));
@@ -43,7 +39,7 @@ public class RouteCalculatorTest {
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
-        Assertions.assertEquals(4, route.size());
+        assertEquals(4, route.size());
         assertEquals(from, route.get(0));
         assertEquals(new Station("Station 2", line1), route.get(1));
         assertEquals(new Station("Station 3", line2), route.get(2));

@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-
-
 public class Main {
     private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
@@ -87,16 +84,14 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return stationIndex;
     }
 
     private static void parseConnections(JSONArray connectionsArray) {
-        connectionsArray.forEach(connectionObject ->
-        {
+        connectionsArray.forEach(connectionObject -> {
             JSONArray connection = (JSONArray) connectionObject;
             List<Station> connectionStations = new ArrayList<>();
-            connection.forEach(item ->
-            {
+            connection.forEach(item -> {
                 JSONObject itemObject = (JSONObject) item;
                 int lineNumber = ((Long) itemObject.get("line")).intValue();
                 String stationName = (String) itemObject.get("station");
@@ -113,13 +108,11 @@ public class Main {
     }
 
     private static void parseStations(JSONObject stationsObject) {
-        stationsObject.keySet().forEach(lineNumberObject ->
-        {
+        stationsObject.keySet().forEach(lineNumberObject -> {
             int lineNumber = Integer.parseInt((String) lineNumberObject);
             Line line = stationIndex.getLine(lineNumber);
             JSONArray stationsArray = (JSONArray) stationsObject.get(lineNumberObject);
-            stationsArray.forEach(stationObject ->
-            {
+            stationsArray.forEach(stationObject -> {
                 Station station = new Station((String) stationObject, line);
                 stationIndex.addStation(station);
                 line.addStation(station);
