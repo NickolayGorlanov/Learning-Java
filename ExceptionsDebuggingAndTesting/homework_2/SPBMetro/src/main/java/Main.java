@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
+
 public class Main {
     private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
@@ -67,7 +70,7 @@ public class Main {
         }
     }
 
-    private static void createStationIndex() {
+    static StationIndex createStationIndex() {
         stationIndex = new StationIndex();
         try {
             JSONParser parser = new JSONParser();
@@ -84,6 +87,7 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
     }
 
     private static void parseConnections(JSONArray connectionsArray) {
@@ -138,7 +142,7 @@ public class Main {
         StringBuilder builder = new StringBuilder();
         try {
             List<String> lines = Files.readAllLines(Paths.get(DATA_FILE));
-            lines.forEach(line -> builder.append(line));
+            lines.forEach(builder::append);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
