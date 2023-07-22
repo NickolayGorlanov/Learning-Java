@@ -12,27 +12,34 @@ public class Main {
             COMMAND_EXAMPLES;
     private static final String HELP_TEXT = "Command examples:\n" + COMMAND_EXAMPLES;
 
+
+
+
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
+    public static final Logger ERRORS_LOGGER = LogManager.getLogger("CustomerStorage");
+    public static final Logger QUERIES_LOGGER = LogManager.getLogger("MainInput");
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CustomerStorage executor = new CustomerStorage();
 
-        LOGGER.info("Application started.");
+
 
         while (true) {
             try {
                 String command = scanner.nextLine();
                 String[] tokens = command.split("\\s+", 2);
 
-                LOGGER.info("Command: {}", command);
+                // Используем новый логгер для записи запросов
+                QUERIES_LOGGER.info("Command: {}", command);
 
                 if (tokens[0].equals("add")) {
                     try {
                         executor.addCustomer(tokens[1]);
                     } catch (CustomerStorage.InvalidDataFormatException | CustomerStorage.InvalidPhoneNumberException | CustomerStorage.InvalidEmailException e) {
                         System.err.println("An error occurred: " + e.getMessage());
-                        LOGGER.error("Error adding customer: {}", e.getMessage());
+                        ERRORS_LOGGER.error("Error adding customer: {}", e.getMessage());
                     }
                 } else if (tokens[0].equals("list")) {
                     executor.listCustomers();
@@ -46,11 +53,11 @@ public class Main {
                     break; // Выход из цикла при вводе команды "exit"
                 } else {
                     System.out.println(COMMAND_ERROR);
-                    LOGGER.error("Invalid command: {}", command);
+                    ERRORS_LOGGER.error("Invalid command: {}", command);
                 }
             } catch (RuntimeException e) {
                 System.err.println("An error occurred: " + e.getMessage());
-                LOGGER.error("Error executing command: {}", e.getMessage());
+                ERRORS_LOGGER.error("Error executing command: {}", e.getMessage());
             }
         }
 

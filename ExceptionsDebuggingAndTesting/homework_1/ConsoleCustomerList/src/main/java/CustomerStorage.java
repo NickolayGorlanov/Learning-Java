@@ -41,9 +41,12 @@ public class CustomerStorage {
             LOGGER.info("Customer '{}' added successfully.", name);
         } catch (InvalidDataFormatException | InvalidPhoneNumberException | InvalidEmailException e) {
             LOGGER.error("Error adding customer: {}", e.getMessage());
-            throw e;
+
+
         }
+
     }
+
 
     public void listCustomers() {
         storage.values().forEach(System.out::println);
@@ -81,6 +84,8 @@ public class CustomerStorage {
             return false; // Неверный формат
         }
     }
+
+
 
 
 

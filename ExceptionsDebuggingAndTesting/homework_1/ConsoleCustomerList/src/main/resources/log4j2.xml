@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-        <File name="queriesLog" fileName="logs/queries.log" append="true">
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <File name="QueriesFile" fileName="/home/user/IdeaProjects/java_basics/ExceptionsDebuggingAndTesting/homework_1/ConsoleCustomerList/logs/queries.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
-        <File name="errorsLog" fileName="logs/errors.log" append="true">
+
+        <File name="ErrorsFile" fileName="/home/user/IdeaProjects/java_basics/ExceptionsDebuggingAndTesting/homework_1/ConsoleCustomerList/logs/errors.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
+
     <Loggers>
-        <Root level="info">
-            <AppenderRef ref="queriesLog"/>
-            <AppenderRef ref="errorsLog"/>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ErrorsFile"/>
         </Root>
+
+        <Logger name="MainInput" level="INFO" additivity="false">
+            <AppenderRef ref="QueriesFile"/>
+        </Logger>
+
     </Loggers>
 </Configuration>
