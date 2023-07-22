@@ -1,8 +1,6 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +12,7 @@ public class CustomerStorage {
         storage = new HashMap<>();
     }
 
-    public void addCustomer(String data) {
+    public void addCustomer(String data) throws InvalidDataFormatException, InvalidPhoneNumberException, InvalidEmailException {
         final int INDEX_NAME = 0;
         final int INDEX_SURNAME = 1;
         final int INDEX_EMAIL = 2;
@@ -22,31 +20,23 @@ public class CustomerStorage {
 
         String[] components = data.split("\\s+");
 
-        try {
-            if (components.length != 4) {
-                throw new InvalidDataFormatException("Invalid number of components in the input data.");
-            }
-
-            String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
-
-            if (!isValidPhoneNumber(components[INDEX_PHONE])) {
-                throw new InvalidPhoneNumberException("Invalid phone number format.");
-            }
-
-            if (!isValidEmail(components[INDEX_EMAIL])) {
-                throw new InvalidEmailException("Invalid email format.");
-            }
-
-            storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
-            LOGGER.info("Customer '{}' added successfully.", name);
-        } catch (InvalidDataFormatException | InvalidPhoneNumberException | InvalidEmailException e) {
-            LOGGER.error("Error adding customer: {}", e.getMessage());
-
-
+        if (components.length != 4) {
+            throw new InvalidDataFormatException("Invalid number of components in the input data.");
         }
 
-    }
+        String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
 
+        if (!isValidPhoneNumber(components[INDEX_PHONE])) {
+            throw new InvalidPhoneNumberException("Invalid phone number format.");
+        }
+
+        if (!isValidEmail(components[INDEX_EMAIL])) {
+            throw new InvalidEmailException("Invalid email format.");
+        }
+
+        storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
+        LOGGER.info("Customer '{}' added successfully.", name);
+    }
 
     public void listCustomers() {
         storage.values().forEach(System.out::println);
@@ -66,7 +56,7 @@ public class CustomerStorage {
 
     private boolean isValidPhoneNumber(String phoneNumber) {
         // Проверка формата телефонного номера
-         if (phoneNumber.matches("\\+\\d{11}")) {
+        if (phoneNumber.matches("\\+\\d{11}")) {
             return true;  // Верный формат
         } else {
             LOGGER.error("Invalid phone number format: {}", phoneNumber);
@@ -76,7 +66,6 @@ public class CustomerStorage {
 
     private boolean isValidEmail(String email) {
         // Проверка формата email
-
         if (email.matches("[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")) {
             return true;  // Верный формат
         } else {
@@ -84,11 +73,6 @@ public class CustomerStorage {
             return false; // Неверный формат
         }
     }
-
-
-
-
-
 
     public static class InvalidDataFormatException extends RuntimeException {
         public InvalidDataFormatException(String message) {
