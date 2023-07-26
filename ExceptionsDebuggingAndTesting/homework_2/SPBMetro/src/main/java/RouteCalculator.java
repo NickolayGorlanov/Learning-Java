@@ -1,9 +1,6 @@
 import core.Station;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class RouteCalculator {
     private final StationIndex stationIndex;
@@ -16,26 +13,42 @@ public class RouteCalculator {
     }
 
     public List<Station> getShortestRoute(Station from, Station to) {
-        List<Station> route = getRouteOnTheLine(from, to);
-        if (route != null) {
-            return route;
+        if (from == null || to == null) {
+            return Collections.emptyList();
         }
 
-        route = getRouteWithOneConnection(from, to);
-        if (route != null) {
-            return route;
+        List<Station> route = new ArrayList<>();
+        if (from.getLine().equals(to.getLine())) {
+            route.addAll(getRouteOnTheLine(from, to));
+        } else {
+            List<Station> routeWithOneConnection = getRouteWithOneConnection(from, to);
+            List<Station> routeWithTwoConnections = getRouteWithTwoConnections(from, to);
+
+            if (routeWithOneConnection == null && routeWithTwoConnections == null) {
+                return Collections.emptyList(); // No route found
+            } else if (routeWithOneConnection == null) {
+                route.addAll(routeWithTwoConnections);
+            } else if (routeWithTwoConnections == null) {
+                route.addAll(routeWithOneConnection);
+            } else {
+                route.addAll(getShortest(routeWithOneConnection, routeWithTwoConnections));
+            }
         }
 
-        route = getRouteWithTwoConnections(from, to);
         return route;
+    }
+
+    private List<Station> getShortest(List<Station> route1, List<Station> route2) {
+        double duration1 = calculateDuration(route1);
+        double duration2 = calculateDuration(route2);
+        return duration1 <= duration2 ? route1 : route2;
     }
 
     public static double calculateDuration(List<Station> route) {
         double duration = 0;
         Station previousStation = null;
-        for (int i = 0; i < route.size(); i++) {
-            Station station = route.get(i);
-            if (i > 0) {
+        for (Station station : route) {
+            if (previousStation != null) {
                 duration += previousStation.getLine().equals(station.getLine()) ?
                         INTER_STATION_DURATION : INTER_CONNECTION_DURATION;
             }
@@ -46,30 +59,19 @@ public class RouteCalculator {
 
     private List<Station> getRouteOnTheLine(Station from, Station to) {
         if (!from.getLine().equals(to.getLine())) {
-            return null;
+            return Collections.emptyList();
         }
         List<Station> route = new ArrayList<>();
         List<Station> stations = from.getLine().getStations();
-        int direction = 0;
-        for (Station station : stations) {
-            if (direction == 0) {
-                if (station.equals(from)) {
-                    direction = 1;
-                } else if (station.equals(to)) {
-                    direction = -1;
-                }
-            }
-
-            if (direction != 0) {
-                route.add(station);
-            }
-
-            if ((direction == 1 && station.equals(to)) ||
-                    (direction == -1 && station.equals(from))) {
-                break;
-            }
+        int startIndex = stations.indexOf(from);
+        int endIndex = stations.indexOf(to);
+        if (startIndex == -1 || endIndex == -1) {
+            return Collections.emptyList();
         }
-        if (direction == -1) {
+        if (startIndex <= endIndex) {
+            route.addAll(stations.subList(startIndex, endIndex + 1));
+        } else {
+            route.addAll(stations.subList(endIndex, startIndex + 1));
             Collections.reverse(route);
         }
         return route;
@@ -80,72 +82,60 @@ public class RouteCalculator {
             return null;
         }
 
-        List<Station> route = new ArrayList<>();
+        Set<Station> visitedStations = new HashSet<>();
+        Queue<List<Station>> queue = new LinkedList<>();
+        List<Station> initialRoute = new ArrayList<>();
+        initialRoute.add(from);
+        queue.add(initialRoute);
 
-        List<Station> fromLineStations = from.getLine().getStations();
-        List<Station> toLineStations = to.getLine().getStations();
-        for (Station srcStation : fromLineStations) {
-            for (Station dstStation : toLineStations) {
-                if (isConnected(srcStation, dstStation)) {
-                    ArrayList<Station> way = new ArrayList<>();
-                    way.addAll(getRouteOnTheLine(from, srcStation));
-                    way.addAll(getRouteOnTheLine(dstStation, to));
-                    if (route.isEmpty() || route.size() > way.size()) {
-                        route.clear();
-                        route.addAll(way);
-                    }
+        while (!queue.isEmpty()) {
+            List<Station> currentRoute = queue.poll();
+            Station lastStation = currentRoute.get(currentRoute.size() - 1);
+
+            if (lastStation.equals(to)) {
+                return currentRoute;
+            }
+
+            visitedStations.add(lastStation);
+
+            for (Station nextStation : stationIndex.getConnectedStations(lastStation)) {
+                if (!visitedStations.contains(nextStation)) {
+                    List<Station> newRoute = new ArrayList<>(currentRoute);
+                    newRoute.add(nextStation);
+                    queue.add(newRoute);
                 }
             }
         }
-        return route;
-    }
 
-    private boolean isConnected(Station station1, Station station2) {
-        Set<Station> connected = stationIndex.getConnectedStations(station1);
-        return connected.contains(station2);
-    }
-
-    private List<Station> getRouteViaConnectedLine(Station from, Station to) {
-        Set<Station> fromConnected = stationIndex.getConnectedStations(from);
-        Set<Station> toConnected = stationIndex.getConnectedStations(to);
-        for (Station srcStation : fromConnected) {
-            for (Station dstStation : toConnected) {
-                if (srcStation.getLine().equals(dstStation.getLine())) {
-                    return getRouteOnTheLine(srcStation, dstStation);
-                }
-            }
-        }
         return null;
     }
 
     private List<Station> getRouteWithTwoConnections(Station from, Station to) {
         if (from.getLine().equals(to.getLine())) {
-            return null;
+            return Collections.emptyList();
         }
 
-        ArrayList<Station> route = new ArrayList<>();
+        List<Station> bestRoute = null;
+        double shortestDuration = Double.MAX_VALUE;
 
-        List<Station> fromLineStations = from.getLine().getStations();
-        List<Station> toLineStations = to.getLine().getStations();
-
-        for (Station srcStation : fromLineStations) {
-            for (Station dstStation : toLineStations) {
-                List<Station> connectedLineRoute =
-                        getRouteViaConnectedLine(srcStation, dstStation);
-                if (connectedLineRoute == null) {
-                    continue;
-                }
-                List<Station> way = new ArrayList<>();
-                way.addAll(getRouteOnTheLine(from, srcStation));
-                way.addAll(connectedLineRoute);
-                way.addAll(getRouteOnTheLine(dstStation, to));
-                if (route.isEmpty() || route.size() > way.size()) {
-                    route.clear();
-                    route.addAll(way);
+        for (Station station1 : stationIndex.getConnectedStations(from)) {
+            for (Station station2 : stationIndex.getConnectedStations(to)) {
+                if (station1.getLine().equals(station2.getLine())) {
+                    List<Station> route1 = getRouteOnTheLine(from, station1);
+                    List<Station> route2 = getRouteOnTheLine(station2, to);
+                    if (route1 != null && route2 != null) {
+                        List<Station> combinedRoute = new ArrayList<>(route1);
+                        combinedRoute.addAll(route2);
+                        double duration = calculateDuration(combinedRoute);
+                        if (duration < shortestDuration) {
+                            bestRoute = combinedRoute;
+                            shortestDuration = duration;
+                        }
+                    }
                 }
             }
         }
 
-        return route;
+        return bestRoute;
     }
 }
