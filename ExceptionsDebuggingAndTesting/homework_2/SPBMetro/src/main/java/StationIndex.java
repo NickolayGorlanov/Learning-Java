@@ -47,6 +47,7 @@ public class StationIndex {
         return null;
     }
 
+
     public Station getStation(String name, int lineNumber) {
         Station query = new Station(name, getLine(lineNumber));
         Station station = stations.ceiling(query);

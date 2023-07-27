@@ -5,11 +5,11 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <File name="QueriesFile" fileName="/home/user/IdeaProjects/java_basics/ExceptionsDebuggingAndTesting/homework_1/ConsoleCustomerList/logs/queries.log" append="true">
+        <File name="QueriesFile" fileName="/logs/queries.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
 
-        <File name="ErrorsFile" fileName="/home/user/IdeaProjects/java_basics/ExceptionsDebuggingAndTesting/homework_1/ConsoleCustomerList/logs/errors.log" append="true">
+        <File name="ErrorsFile" fileName="/logs/errors.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>

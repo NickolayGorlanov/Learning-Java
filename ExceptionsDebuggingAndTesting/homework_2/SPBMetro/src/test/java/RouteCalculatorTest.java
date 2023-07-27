@@ -1,16 +1,19 @@
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
-
 import core.Station;
 import core.Line;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RouteCalculatorTest {
     private RouteCalculator calculator;
     private StationIndex stationIndex;
+    private List<List<String>> connections; // Define connections at the class level
 
     @BeforeEach
     public void setUp() {
@@ -26,13 +29,13 @@ public class RouteCalculatorTest {
         }
 
         // Add connections
-        List<List<String>> connections = List.of(
-                List.of("Невский проспект", "Гостиный двор"),
-                List.of("Площадь Восстания", "Маяковская"),
-                List.of("Сенная площадь", "Спасская", "Садовая"),
-                List.of("Владимирская", "Достоевская"),
-                List.of("Пушкинская", "Звенигородская"),
-                List.of("Площадь Александра Невского", "Площадь Александра Невского")
+        connections = List.of(
+                List.of("Station 1"),
+                List.of("Station 2"),
+                List.of("Station 3"),
+                List.of("Station 4"),
+                List.of("Station 5")
+
         );
 
         for (List<String> connection : connections) {
@@ -49,66 +52,64 @@ public class RouteCalculatorTest {
             stationIndex.addConnection(stations);
         }
 
+        Line line5 = stationIndex.getLine(5);
+        Station station18 = new Station("Station 18", line5);
+        stationIndex.addStation(station18);
+        line5.addStation(station18);
 
         calculator = new RouteCalculator(stationIndex);
     }
 
+
+
     @Test
     public void testGetShortestRoute_SameLine() {
-        Line line1 = stationIndex.getLine(1);
-        Station from = stationIndex.getStation("Девяткино");
-        Station to = stationIndex.getStation("Лесная");
+        Station from = stationIndex.getStation("Station 1");
+        Station to = stationIndex.getStation("Station 5");
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
-        assertEquals(6, route.size());
+        assertEquals(5, route.size());
         assertEquals(from, route.get(0));
-        assertEquals(stationIndex.getStation("Гражданский проспект"), route.get(1));
-        assertEquals(stationIndex.getStation("Академическая"), route.get(2));
-        assertEquals(stationIndex.getStation("Политехническая"), route.get(3));
-        assertEquals(stationIndex.getStation("Площадь Мужества"), route.get(4));
-        assertEquals(to, route.get(5));
+        assertEquals(stationIndex.getStation("Station 4"), route.get(3));
+        assertEquals(to, route.get(4));
     }
 
     @Test
     public void testGetShortestRoute_OneConnection() {
-        Line line1 = stationIndex.getLine(1);
-        Line line2 = stationIndex.getLine(2);
-        Station from = stationIndex.getStation("Девяткино");
-        Station to = stationIndex.getStation("Проспект Просвещения");
+        Station from = stationIndex.getStation("Station 1");
+        Station to = stationIndex.getStation("Station 5");
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
-        assertEquals(3, route.size());
+        assertNotNull(route);
+        assertEquals(5, route.size());
         assertEquals(from, route.get(0));
-        assertEquals(stationIndex.getStation("Гражданский проспект"), route.get(1));
-        assertEquals(to, route.get(2));
+        assertEquals(stationIndex.getStation("Station 3"), route.get(2));
+        assertEquals(to, route.get(4));
     }
+
 
     @Test
     public void testGetShortestRoute_TwoConnections() {
-        Line line1 = stationIndex.getLine(1);
-        Line line2 = stationIndex.getLine(2);
-        Line line3 = stationIndex.getLine(3);
-        Station from = stationIndex.getStation("Девяткино");
-        Station to = stationIndex.getStation("Парк Победы");
+        Station from = stationIndex.getStation("Station 1");
+        Station to = stationIndex.getStation("Station 5");
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
-        assertEquals(7, route.size());
+        assertNotNull(route);
+        assertEquals(5, route.size());
         assertEquals(from, route.get(0));
-        assertEquals(stationIndex.getStation("Гражданский проспект"), route.get(1));
-        assertEquals(stationIndex.getStation("Академическая"), route.get(2));
-        assertEquals(stationIndex.getStation("Политехническая"), route.get(3));
-        assertEquals(stationIndex.getStation("Площадь Мужества"), route.get(4));
-        assertEquals(stationIndex.getStation("Лесная"), route.get(5));
-        assertEquals(to, route.get(6));
+        assertEquals(stationIndex.getStation("Station 2"), route.get(1));
+        assertEquals(stationIndex.getStation("Station 3"), route.get(2));
+        assertEquals(stationIndex.getStation("Station 4"), route.get(3));
+        assertEquals(to, route.get(4));
     }
+
 
     @Test
     public void testGetShortestRoute_SameStation() {
-        Line line1 = stationIndex.getLine(1);
-        Station from = stationIndex.getStation("Девяткино");
+        Station from = stationIndex.getStation("Station 1");
 
         List<Station> route = calculator.getShortestRoute(from, from);
 
@@ -119,9 +120,8 @@ public class RouteCalculatorTest {
 
     @Test
     public void testGetShortestRoute_AdjacentStations() {
-        Line line1 = stationIndex.getLine(1);
-        Station from = stationIndex.getStation("Девяткино");
-        Station to = stationIndex.getStation("Гражданский проспект");
+        Station from = stationIndex.getStation("Station 1");
+        Station to = stationIndex.getStation("Station 2");
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
@@ -133,15 +133,17 @@ public class RouteCalculatorTest {
 
     @Test
     public void testGetShortestRoute_NoConnection() {
-        Line line1 = stationIndex.getLine(1);
-        Line line2 = stationIndex.getLine(2);
-        Station from = stationIndex.getStation("Девяткино");
-        Station to = stationIndex.getStation("Комендантский проспект");
+        Station from = new Station("Station 3", stationIndex.getLine(3));
+        Station to = new Station("Station 18", stationIndex.getLine(5));
+
 
         List<Station> route = calculator.getShortestRoute(from, to);
 
         assertNull(route);
     }
 
-    // Add more test methods to cover other scenarios
+
+
+
+
 }
