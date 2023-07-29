@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -136,11 +137,11 @@ public class RouteCalculatorTest {
         Station from = new Station("Station 3", stationIndex.getLine(3));
         Station to = new Station("Station 18", stationIndex.getLine(5));
 
-
         List<Station> route = calculator.getShortestRoute(from, to);
 
-        assertNull(route);
+        assertTrue(route.isEmpty());
     }
+
 
 
 
