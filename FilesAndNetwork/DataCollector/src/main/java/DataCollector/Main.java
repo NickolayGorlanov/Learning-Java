@@ -109,24 +109,13 @@ public class Main {
         List<SubwayStationData> stationDataList = new ArrayList<>();
         for (SubwayStationDataCsv csvData : csvDataList) {
             SubwayStationData stationData = new SubwayStationData(csvData.getName(), csvData.getDate());
-            // Здесь можно установить другие свойства, если нужно
+
             stationDataList.add(stationData);
         }
         return stationDataList;
     }
 
-   /* // Кастомный десериализатор для чисел с запятой
-    public static class CustomDoubleDeserializer implements JsonDeserializer<Double> {
-        @Override
-        public Double deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            String numberString = json.getAsString().replace(",", ".");
-            try {
-                return Double.parseDouble(numberString);
-            } catch (NumberFormatException e) {
-                throw new JsonParseException("Некорректный формат числа: " + numberString, e);
-            }
-        }
-    }*/
+
 
        }
 
