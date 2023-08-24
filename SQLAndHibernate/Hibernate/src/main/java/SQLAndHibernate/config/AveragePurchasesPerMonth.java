@@ -14,20 +14,19 @@ public class AveragePurchasesPerMonth {
         String password = "***";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-            String sqlQuery = "SELECT pl.course_name, " +
-                    "COUNT(DISTINCT pl.subscription_date) / 8 AS average_purchases_per_month " +
+            String sqlQuery = "SELECT pl.course_name, pl.subscription_date " +
                     "FROM PurchaseList pl " +
                     "WHERE YEAR(pl.subscription_date) = 2018 " +
-                    "GROUP BY pl.course_name";
+                    "ORDER BY pl.course_name, pl.subscription_date";  // Отсортировать по курсам и датам
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 String courseName = resultSet.getString("course_name");
-                double averagePurchases = resultSet.getDouble("average_purchases_per_month");
+                String subscriptionDate = resultSet.getString("subscription_date");
 
-                System.out.println("Course: " + courseName + ", Average Purchases per Month: " + averagePurchases);
+                System.out.println("Course: " + courseName + ", Subscription Date: " + subscriptionDate);
             }
         } catch (SQLException e) {
             e.printStackTrace();
