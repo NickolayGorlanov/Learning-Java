@@ -24,4 +24,11 @@ public class LinkedPurchaseList {
     private LocalDateTime subscriptionDate;
 
 
+    public LinkedPurchaseList(LinkedPurchaseListKey id, Student student, Course course, int price, LocalDateTime subscriptionDate) {
+        this.id = id;
+        this.student = student;
+        this.course = course;
+        this.price = price;
+        this.subscriptionDate = subscriptionDate;
+    }
 }

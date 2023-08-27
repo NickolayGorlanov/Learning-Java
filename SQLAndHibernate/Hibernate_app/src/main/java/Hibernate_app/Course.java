@@ -13,8 +13,12 @@ public class Course {
     private String name;
     private int duration;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
     @OneToMany(mappedBy = "course")
     private List<Subscription> subscriptions;
 
-
+    // Геттеры и сеттеры для всех полей
 }

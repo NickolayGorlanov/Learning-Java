@@ -1,6 +1,7 @@
 package Hibernate_app;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,5 +22,13 @@ public class PurchaseList {
     @Column(name = "subscription_date")
     private LocalDateTime subscriptionDate;
 
+    public PurchaseList(String student_name, String course_name, int price, LocalDateTime subscription_date) {
+        this.studentName = student_name;
+        this.courseName = course_name;
+        this.price = price;
+        this.subscriptionDate = subscription_date;
+    }
 
+
+    // Геттеры и сеттеры
 }

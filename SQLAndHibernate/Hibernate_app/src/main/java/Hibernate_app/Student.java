@@ -19,4 +19,10 @@ public class Student {
     private List<Subscription> subscriptions;
 
 
+    public Student(Long id, String name, int age, List<Subscription> subscriptions) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.subscriptions = subscriptions;
+    }
 }

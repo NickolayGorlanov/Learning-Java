@@ -4,7 +4,7 @@
 <hibernate-configuration>
     <session-factory>
         <!-- JDBC Database connection settings -->
-        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
         <property name="connection.url">jdbc:mariadb://localhost:3306/Hibernate_app</property>
 
         <property name="connection.username">root</property>
@@ -19,13 +19,13 @@
         <!-- Set the current session context -->
         <property name="current_session_context_class">thread</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
 
-        <mapping class="Course" />
-        <mapping class="Student" />
-        <mapping class="Subscription" />
-        <mapping class="Teacher" />
-        <mapping class="PurchaseList" />
+        <mapping class="Hibernate_app.Course" />
+        <mapping class="Hibernate_app.Student" />
+        <mapping class="Hibernate_app.Subscription" />
+        <mapping class="Hibernate_app.Teacher" />
+        <mapping class="Hibernate_app.PurchaseList" />
 
     </session-factory>
 </hibernate-configuration>

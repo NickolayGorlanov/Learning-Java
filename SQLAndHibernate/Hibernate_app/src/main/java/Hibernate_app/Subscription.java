@@ -21,6 +21,12 @@ import java.time.LocalDateTime;
         private LocalDateTime subscriptionDate;
 
 
+    public Subscription(SubscriptionKey id, Student student, Course course, LocalDateTime subscriptionDate) {
+        this.id = id;
+        this.student = student;
+        this.course = course;
+        this.subscriptionDate = subscriptionDate;
     }
+}
 
 

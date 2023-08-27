@@ -18,4 +18,11 @@ public class Teacher {
     private List<Course> courses;
 
 
+    public Teacher(Long id, String name, int salary, int age, List<Course> courses) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.age = age;
+        this.courses = courses;
+    }
 }
