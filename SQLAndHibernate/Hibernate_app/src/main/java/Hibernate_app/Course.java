@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Courses")
+@Table(name = "Courses" )
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,6 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Subscription> subscriptions;
 
-    // Геттеры и сеттеры для всех полей
+
+
 }

@@ -30,5 +30,5 @@ public class PurchaseList {
     }
 
 
-    // Геттеры и сеттеры
+
 }

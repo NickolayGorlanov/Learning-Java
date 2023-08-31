@@ -1,4 +1,4 @@
-package Hibernate_app;
+ package Hibernate_app;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,6 +6,8 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -13,7 +15,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-        String sqlScriptFile = "/home/user/IdeaProjects/Hibernate_app/src/main/resources/skillbox_dump_wfk.sql"; // Path to the SQL script
+        String sqlScriptFile = "skillbox_dump_wfk.sql"; // Path to the SQL script
 
         // Create Hibernate session factory
         SessionFactory sessionFactory = new Configuration()
@@ -21,7 +23,8 @@ public class Main {
                 .buildSessionFactory();
 
         try (Session session = sessionFactory.getCurrentSession();
-             BufferedReader reader = new BufferedReader(new FileReader(sqlScriptFile))) {
+             InputStream inputStream = Main.class.getResourceAsStream("/" + sqlScriptFile);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
 
             session.beginTransaction();
 
