@@ -17,18 +17,27 @@ public class PurchaseList {
     @Column(name = "course_name")
     private String courseName;
 
-    private int price;
-
-    @Column(name = "subscription_date")
-    private LocalDateTime subscriptionDate;
-
-    public PurchaseList(String student_name, String course_name, int price, LocalDateTime subscription_date) {
-        this.studentName = student_name;
-        this.courseName = course_name;
-        this.price = price;
-        this.subscriptionDate = subscription_date;
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public String getStudentName() {
+        return studentName;
+    }
 
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 }

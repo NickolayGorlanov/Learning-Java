@@ -2,27 +2,53 @@ package Hibernate_app;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
 @Entity
 @Table(name = "Students")
 public class Student {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
     private int age;
+    @Column(name = "registration_date")
+    private Date  registrationDate;
 
-    @OneToMany(mappedBy = "student")
-    private List<Subscription> subscriptions;
 
-
-    public Student(Long id, String name, int age, List<Subscription> subscriptions) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.subscriptions = subscriptions;
-    }
 }

@@ -1,31 +1,23 @@
 package Hibernate_app;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 
 @Entity
-    @Table(name = "Subscriptions")
-    public class Subscription {
-        @EmbeddedId
-        private SubscriptionKey id;
+@Table(name = "Subscriptions")
+public class Subscription {
+    @EmbeddedId
+    private SubscriptionKey id;
 
-        @ManyToOne
-        @JoinColumn(name = "student_id", insertable = false, updatable = false)
-        private Student student;
+    @Column(name = "student_id", insertable = false, updatable = false)
+    private int studentId;
 
-        @ManyToOne
-        @JoinColumn(name = "course_id", insertable = false, updatable = false)
-        private Course course;
-
-        private LocalDateTime subscriptionDate;
+    @Column(name = "course_id", insertable = false, updatable = false)
+    private int courseId;
 
 
-    public Subscription(SubscriptionKey id, Student student, Course course, LocalDateTime subscriptionDate) {
-        this.id = id;
-        this.student = student;
-        this.course = course;
-        this.subscriptionDate = subscriptionDate;
+    public Subscription(SubscriptionKey id, int studentId, int courseId) {
+
     }
 }
 

@@ -1,34 +1,45 @@
 package Hibernate_app;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PurchaseList")
+@Table(name = "LinkedPurchaseList")
 public class LinkedPurchaseList {
-    @EmbeddedId
-    private LinkedPurchaseListKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", insertable = false, updatable = false)
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", insertable = false, updatable = false)
+    @JoinColumn(name = "course_id")
     private Course course;
 
-    @Column(name = "price")
-    private int price;
+    // Геттеры и сеттеры
 
-    @Column(name = "subscription_date")
-    private LocalDateTime subscriptionDate;
+    public int getId() {
+        return id;
+    }
 
-
-    public LinkedPurchaseList(LinkedPurchaseListKey id, Student student, Course course, int price, LocalDateTime subscriptionDate) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
         this.course = course;
-        this.price = price;
-        this.subscriptionDate = subscriptionDate;
     }
 }
