@@ -25,10 +25,5 @@ public class SubscriptionKey implements Serializable {
         return courseId.equals(that.courseId);
     }
 
-    @Override
-    public int hashCode() {
-        int result = studentId.hashCode();
-        result = 31 * result + courseId.hashCode();
-        return result;
-    }
+
 }
