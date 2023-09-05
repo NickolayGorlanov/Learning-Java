@@ -40,4 +40,12 @@ public class PurchaseList {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
+
+    public Student getStudent() {
+        return null;
+    }
+
+    public Course getCourse() {
+        return null;
+    }
 }

@@ -13,7 +13,7 @@ public class Course {
     private String name;
     private int duration;
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum")
+  /*  @Column(columnDefinition = "enum")*/
     private CourseType type;
     private String description;
 
@@ -29,7 +29,7 @@ public class Course {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Subscriptions",
-    joinColumns = {@JoinColumn(name = "course_id")},
+            joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
     private List<Student> students;
@@ -73,14 +73,12 @@ public class Course {
         this.description = description;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
-    public Teacher setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-        return teacher;
-    }
 
     public int getStudentsCount() {
         return studentsCount;

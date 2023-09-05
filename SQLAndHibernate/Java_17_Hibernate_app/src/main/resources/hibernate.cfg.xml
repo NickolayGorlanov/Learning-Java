@@ -5,7 +5,7 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/skillbox?useSSL=false</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/skillbox</property>
 
         <property name="connection.username">root</property>
         <property name="connection.password">kol89</property>
@@ -28,6 +28,7 @@
         <mapping class="Hibernate_app.Subscription" />
         <mapping class="Hibernate_app.Teacher" />
         <mapping class="Hibernate_app.PurchaseList" />
+        <mapping class="Hibernate_app.LinkedPurchaseList" />
 
     </session-factory>
 </hibernate-configuration>

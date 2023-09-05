@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "Students")
 public class Student {
-    public int getId() {
+    public int getId(int id) {
         return id;
     }
 
@@ -17,7 +17,7 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName(String name) {
         return name;
     }
 
@@ -25,7 +25,7 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
+    public int getAge(int age) {
         return age;
     }
 
@@ -33,7 +33,7 @@ public class Student {
         this.age = age;
     }
 
-    public Date getRegistrationDate() {
+    public Date getRegistrationDate(Date registrationDate) {
         return registrationDate;
     }
 

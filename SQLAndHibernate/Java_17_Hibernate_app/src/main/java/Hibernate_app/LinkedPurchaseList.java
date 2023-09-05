@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "LinkedPurchaseList")
 public class LinkedPurchaseList {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,6 +18,12 @@ public class LinkedPurchaseList {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+
+    public LinkedPurchaseList(Student student_name, Course course_name) {
+        this.student = student_name;
+        this.course = course_name;
+    }
 
     // Геттеры и сеттеры
 
@@ -31,15 +39,15 @@ public class LinkedPurchaseList {
         return student;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudent(Student student_name) {
+        this.student = student_name;
     }
 
     public Course getCourse() {
         return course;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Course course_name) {
+        this.course = course_name;
     }
 }
