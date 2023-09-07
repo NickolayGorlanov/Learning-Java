@@ -1,6 +1,7 @@
 package Hibernate_app;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Subscriptions")
@@ -20,6 +21,8 @@ public class Subscription {
 
 
 
+    @Column(name = "subscription_date")
+    private Date subscriptionDate;
 
 
     public Subscription(SubscriptionKey id, Student student, Course course) {
