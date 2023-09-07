@@ -3,7 +3,6 @@ package Hibernate_app;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Embeddable
 public class SubscriptionKey implements Serializable {
     @Column(name = "student_id")
     private Long studentId;
@@ -13,17 +12,19 @@ public class SubscriptionKey implements Serializable {
 
     // Геттеры и сеттеры
 
-    // Пример реализации equals и hashCode для составного ключа
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SubscriptionKey that = (SubscriptionKey) o;
-
-        if (!studentId.equals(that.studentId)) return false;
-        return courseId.equals(that.courseId);
+    public Long getStudentId() {
+        return studentId;
     }
 
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
 
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
 }

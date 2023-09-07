@@ -2,7 +2,6 @@ package Hibernate_app;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "PurchaseList")
@@ -16,6 +15,12 @@ public class PurchaseList {
 
     @Column(name = "course_name")
     private String courseName;
+
+    @Column(name = "price")
+    private Integer price; // Предположим, что столбец "price" имеет тип данных Integer
+
+    @Column(name = "subscription_date")
+    private Date subscriptionDate; // Предположим, что столбец "subscription_date" имеет тип данных Date
 
     public Long getId() {
         return id;
@@ -41,11 +46,29 @@ public class PurchaseList {
         this.courseName = courseName;
     }
 
-    public Student getStudent() {
-        return null;
+    public Integer getPrice() {
+        return price;
     }
 
-    public Course getCourse() {
-        return null;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
+
+    public Date getSubscriptionDate() {
+        return subscriptionDate;
+    }
+
+    public void setSubscriptionDate(Date subscriptionDate) {
+        this.subscriptionDate = subscriptionDate;
+    }
+
+    public String getStudent() {
+        return studentName;
+    }
+
+    public String getCourse() {
+        return courseName;
+    }
+
+    // Остальные геттеры и сеттеры
 }

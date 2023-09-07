@@ -9,7 +9,7 @@ public class LinkedPurchaseList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -20,9 +20,16 @@ public class LinkedPurchaseList {
     private Course course;
 
 
+
+
     public LinkedPurchaseList(Student student_name, Course course_name) {
         this.student = student_name;
         this.course = course_name;
+    }
+
+
+
+    public LinkedPurchaseList(String student, String course) {
     }
 
     // Геттеры и сеттеры
@@ -50,4 +57,11 @@ public class LinkedPurchaseList {
     public void setCourse(Course course_name) {
         this.course = course_name;
     }
+
+
+    public LinkedPurchaseList() {
+
+    }
+
 }
+

@@ -3,10 +3,10 @@ package Hibernate_app;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -15,18 +15,11 @@ public class Main {
         // Инициализация Hibernate
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();
-        Metadata metadata = new MetadataSources(registry)
 
-                .addAnnotatedClass(Teacher.class)
-                .addAnnotatedClass(Course.class)
+        SessionFactory sessionFactory = new MetadataSources(registry)
+                .buildMetadata() // Создаем метаданные на основе конфигурации
+                .getSessionFactoryBuilder().build();
 
-                .addAnnotatedClass(Student.class)
-                .addAnnotatedClass(Subscription.class)
-                .addAnnotatedClass(PurchaseList.class)
-                .addAnnotatedClass(LinkedPurchaseList.class)
-                .getMetadataBuilder().build();
-
-        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
@@ -39,8 +32,8 @@ public class Main {
 
             // Заполняем таблицу LinkedPurchaseList
             for (PurchaseList purchase : purchaseList) {
-                Student student = purchase.getStudent();
-                Course course = purchase.getCourse();
+                String student = purchase.getStudent();
+                String course = purchase.getCourse();
                 LinkedPurchaseList linkedPurchase = new LinkedPurchaseList(student, course);
                 session.save(linkedPurchase);
             }

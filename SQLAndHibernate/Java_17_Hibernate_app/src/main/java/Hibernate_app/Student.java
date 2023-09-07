@@ -1,23 +1,32 @@
 package Hibernate_app;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
 @Table(name = "Students")
 public class Student {
-    public int getId(int id) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String name;
+    private int age;
+
+    @Column(name = "registration_date")
+    private Date registrationDate;
+
+    // Геттеры и сеттеры для полей
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName(String name) {
+    public String getName() {
         return name;
     }
 
@@ -25,7 +34,7 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge(int age) {
+    public int getAge() {
         return age;
     }
 
@@ -33,22 +42,11 @@ public class Student {
         this.age = age;
     }
 
-    public Date getRegistrationDate(Date registrationDate) {
+    public Date getRegistrationDate() {
         return registrationDate;
     }
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String name;
-    private int age;
-    @Column(name = "registration_date")
-    private Date  registrationDate;
-
-
 }
