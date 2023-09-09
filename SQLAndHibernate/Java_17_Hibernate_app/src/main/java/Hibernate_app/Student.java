@@ -9,7 +9,7 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String name;
     private int age;
@@ -18,11 +18,11 @@ public class Student {
     private Date registrationDate;
 
     // Геттеры и сеттеры для полей
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -6,12 +6,30 @@ import java.io.Serializable;
 
 @Embeddable
 public class LinkedPurchaseListKey implements Serializable {
-    @Column(name = "student_id")
-    private Integer studentId;
 
-    @Column(name = "course_id")
-    private Integer courseId;
+    @Column(name = "student_id", columnDefinition = "bigint")
+    private Long studentId;
 
+    @Column(name = "course_id", columnDefinition = "bigint")
+    private Long courseId;
 
+    public Long getStudentId() {
+        return studentId;
+    }
 
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
+
+    public LinkedPurchaseListKey() {
+        // Это пустой конструктор, необходимый для Hibernate.
+    }
 }

@@ -31,12 +31,28 @@ public class Main {
             List<PurchaseList> purchaseList = purchaseListQuery.getResultList();
 
             // Заполняем таблицу LinkedPurchaseList
+            // Заполняем таблицу LinkedPurchaseList
             for (PurchaseList purchase : purchaseList) {
-                String student = purchase.getStudent();
-                String course = purchase.getCourse();
-                LinkedPurchaseList linkedPurchase = new LinkedPurchaseList(student, course);
+                // Получаем studentId и courseId из PurchaseList
+                Long studentId = purchase.getStudentId(); // Предположим, что у PurchaseList есть метод getStudentId()
+                Long courseId = purchase.getCourseId(); // Предположим, что у PurchaseList есть метод getCourseId()
+
+                // Создаем объект LinkedPurchaseListKey
+                LinkedPurchaseListKey key = new LinkedPurchaseListKey();
+                key.setStudentId(studentId);
+                key.setCourseId(courseId);
+
+                // Создаем объект LinkedPurchaseList с использованием ключа
+                LinkedPurchaseList linkedPurchase = new LinkedPurchaseList();
+                linkedPurchase.setId(key);
+
+                // Устанавливаем связи с Student и Course
+                linkedPurchase.setStudent(session.get(Student.class, studentId)); // Получаем объект Student из базы данных
+                linkedPurchase.setCourse(session.get(Course.class, courseId)); // Получаем объект Course из базы данных
+
                 session.save(linkedPurchase);
             }
+
 
             transaction.commit();
         } catch (Exception e) {

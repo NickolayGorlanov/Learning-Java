@@ -5,26 +5,28 @@ import java.io.Serializable;
 
 public class SubscriptionKey implements Serializable {
     @Column(name = "student_id")
-    private int studentId;
+    private Long studentId;
 
     @Column(name = "course_id")
-    private int courseId;
+    private Long courseId;
 
     // Геттеры и сеттеры
 
-    public int getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
-    public int getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
+
 }

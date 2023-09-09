@@ -8,7 +8,7 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String name;
     private int duration;
@@ -33,11 +33,11 @@ public class Course {
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
     private List<Student> students;
-    public int getId(){
+    public Long getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

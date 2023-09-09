@@ -8,7 +8,7 @@ import java.sql.Date;
 public class PurchaseList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "student_name")
     private String studentName;
@@ -22,11 +22,11 @@ public class PurchaseList {
     @Column(name = "subscription_date")
     private Date subscriptionDate; // Предположим, что столбец "subscription_date" имеет тип данных Date
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -70,5 +70,12 @@ public class PurchaseList {
         return courseName;
     }
 
-    // Остальные геттеры и сеттеры
+
+    public Long getStudentId() {
+        return null;
+    }
+
+    public Long getCourseId() {
+        return null;
+    }
 }
