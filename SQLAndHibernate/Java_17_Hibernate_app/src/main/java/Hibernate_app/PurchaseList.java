@@ -61,21 +61,4 @@ public class PurchaseList {
     public void setSubscriptionDate(Date subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
-
-    public String getStudent() {
-        return studentName;
-    }
-
-    public String getCourse() {
-        return courseName;
-    }
-
-
-    public Long getStudentId() {
-        return null;
-    }
-
-    public Long getCourseId() {
-        return null;
-    }
 }

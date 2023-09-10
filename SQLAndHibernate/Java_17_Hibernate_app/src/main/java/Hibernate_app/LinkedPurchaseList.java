@@ -11,14 +11,14 @@ public class LinkedPurchaseList {
     private LinkedPurchaseListKey id;
 
     @ManyToOne
-    @MapsId("studentId") // Связываем с атрибутом studentId составного ключа
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @MapsId("studentId")
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    public Student student;
 
     @ManyToOne
-    @MapsId("courseId") // Связываем с атрибутом courseId составного ключа
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @MapsId("courseId")
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    public Course course;
 
     public LinkedPurchaseListKey getId() {
         return id;
@@ -41,13 +41,6 @@ public class LinkedPurchaseList {
     }
 
     public void setCourse(Course course) {
-        this.course = course;
-    }
-
-
-    public LinkedPurchaseList(LinkedPurchaseListKey id, Student student, Course course) {
-        this.id = id;
-        this.student = student;
         this.course = course;
     }
 

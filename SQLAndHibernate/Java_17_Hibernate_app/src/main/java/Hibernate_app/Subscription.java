@@ -62,5 +62,10 @@ public class Subscription {
         this.course = course;
 
     }
+
+    public Subscription() {
+        // Пустой конструктор по умолчанию
+    }
+
 }
 

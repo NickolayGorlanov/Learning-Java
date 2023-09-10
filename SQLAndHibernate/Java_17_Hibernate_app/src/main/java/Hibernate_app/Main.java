@@ -16,26 +16,21 @@ public class Main {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();
 
-        SessionFactory sessionFactory = new MetadataSources(registry)
-                .buildMetadata() // Создаем метаданные на основе конфигурации
-                .getSessionFactoryBuilder().build();
+        try (SessionFactory sessionFactory = new MetadataSources(registry)
+                .buildMetadata()
+                .getSessionFactoryBuilder()
+                .build(); Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
 
-        Session session = sessionFactory.openSession();
-        Transaction transaction = null;
-
-        try {
-            transaction = session.beginTransaction();
-
-            // Считываем данные из таблицы PurchaseList
-            TypedQuery<PurchaseList> purchaseListQuery = session.createQuery("FROM PurchaseList", PurchaseList.class);
-            List<PurchaseList> purchaseList = purchaseListQuery.getResultList();
+            // Считываем данные из таблицы Subscriptions
+            TypedQuery<Subscription> subscriptionQuery = session.createQuery("FROM Subscription", Subscription.class);
+            List<Subscription> subscriptions = subscriptionQuery.getResultList();
 
             // Заполняем таблицу LinkedPurchaseList
-            // Заполняем таблицу LinkedPurchaseList
-            for (PurchaseList purchase : purchaseList) {
-                // Получаем studentId и courseId из PurchaseList
-                Long studentId = purchase.getStudentId(); // Предположим, что у PurchaseList есть метод getStudentId()
-                Long courseId = purchase.getCourseId(); // Предположим, что у PurchaseList есть метод getCourseId()
+            for (Subscription subscription : subscriptions) {
+                // Получаем studentId и courseId из Subscription
+                Long studentId = subscription.getStudent().getId();
+                Long courseId = subscription.getCourse().getId();
 
                 // Создаем объект LinkedPurchaseListKey
                 LinkedPurchaseListKey key = new LinkedPurchaseListKey();
@@ -47,22 +42,17 @@ public class Main {
                 linkedPurchase.setId(key);
 
                 // Устанавливаем связи с Student и Course
-                linkedPurchase.setStudent(session.get(Student.class, studentId)); // Получаем объект Student из базы данных
-                linkedPurchase.setCourse(session.get(Course.class, courseId)); // Получаем объект Course из базы данных
+                linkedPurchase.setStudent(session.get(Student.class, studentId));
+                linkedPurchase.setCourse(session.get(Course.class, courseId));
 
                 session.save(linkedPurchase);
             }
 
-
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         } finally {
-            session.close();
-            sessionFactory.close();
+            StandardServiceRegistryBuilder.destroy(registry); // Закрытие реестра
         }
     }
 }

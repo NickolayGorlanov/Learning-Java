@@ -7,10 +7,10 @@ import java.io.Serializable;
 @Embeddable
 public class LinkedPurchaseListKey implements Serializable {
 
-    @Column(name = "student_id", columnDefinition = "bigint")
+    @Column(name = "student_id")
     private Long studentId;
 
-    @Column(name = "course_id", columnDefinition = "bigint")
+    @Column(name = "course_id")
     private Long courseId;
 
     public Long getStudentId() {
@@ -28,6 +28,7 @@ public class LinkedPurchaseListKey implements Serializable {
     public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
 
     public LinkedPurchaseListKey() {
         // Это пустой конструктор, необходимый для Hibernate.
