@@ -5,8 +5,8 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args) {
-        String srcFolder = "ImageResizer\\src";
-        String dstFolder = "ImageResizer\\dst";
+        String srcFolder = "ImageResizer\\src\\main\\resources\\src\\src";
+        String dstFolder = "ImageResizer\\src\\main\\resources\\src\\dst";
 
 
         File srcDir = new File(srcFolder);
