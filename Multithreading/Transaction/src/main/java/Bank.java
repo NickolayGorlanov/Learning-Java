@@ -47,30 +47,61 @@ public class Bank {
             throw new IllegalArgumentException("Invalid account number");
         }
 
-        Lock lock1 = fromAccountNum.compareTo(toAccountNum) < 0 ? fromAccount.getLock() : toAccount.getLock();
-        Lock lock2 = fromAccountNum.compareTo(toAccountNum) < 0 ? toAccount.getLock() : fromAccount.getLock();
-
-        try {
-            lock1.lock();
-            lock2.lock();
-
-            if (isFraud(fromAccountNum, toAccountNum, amount)) {
-                // Если обнаружено мошенничество, блокируем счета и обновляем их балансы.
-                fromAccount.setBlocked(true);
-                toAccount.setBlocked(true);
-                fromAccount.setMoney(fromAccount.getMoney() - amount); // Уменьшаем сумму на счете отправителя
-                toAccount.setMoney(toAccount.getMoney() + amount);     // Увеличиваем сумму на счете получателя
-                logger.debug("Fraud detected during transfer: from {} to {} amount: {}", fromAccountNum, toAccountNum, amount);
-                return;
+        if (amount > 50000) { // Проверка мошенничества только для сумм больше 50 000
+            Lock lock1, lock2;
+            if (fromAccountNum.compareTo(toAccountNum) < 0) {
+                lock1 = fromAccount.getLock();
+                lock2 = toAccount.getLock();
+            } else {
+                lock1 = toAccount.getLock();
+                lock2 = fromAccount.getLock();
             }
 
-            if (!fromAccount.isBlocked() && !toAccount.isBlocked() && fromAccount.getMoney() >= amount) {
-                fromAccount.setMoney(fromAccount.getMoney() - amount);
-                toAccount.setMoney(toAccount.getMoney() + amount);
+            try {
+                lock1.lock();
+                lock2.lock();
+
+                if (isFraud(fromAccountNum, toAccountNum, amount)) {
+                    // Если обнаружено мошенничество, блокируем счета и обновляем их балансы.
+                    fromAccount.setBlocked(true);
+                    toAccount.setBlocked(true);
+                    fromAccount.setMoney(fromAccount.getMoney() - amount); // Уменьшаем сумму на счете отправителя
+                    toAccount.setMoney(toAccount.getMoney() + amount);     // Увеличиваем сумму на счете получателя
+                    logger.debug("Fraud detected during transfer: from {} to {} amount: {}", fromAccountNum, toAccountNum, amount);
+                    return;
+                }
+
+                if (!fromAccount.isBlocked() && !toAccount.isBlocked() && fromAccount.getMoney() >= amount) {
+                    fromAccount.setMoney(fromAccount.getMoney() - amount);
+                    toAccount.setMoney(toAccount.getMoney() + amount);
+                }
+            } finally {
+                lock1.unlock();
+                lock2.unlock();
             }
-        } finally {
-            lock1.unlock();
-            lock2.unlock();
+        } else {
+            // Если сумма меньше 50 000, выполняем транзакцию без проверки мошенничества
+            Lock lock1, lock2;
+            if (fromAccountNum.compareTo(toAccountNum) < 0) {
+                lock1 = fromAccount.getLock();
+                lock2 = toAccount.getLock();
+            } else {
+                lock1 = toAccount.getLock();
+                lock2 = fromAccount.getLock();
+            }
+
+            try {
+                lock1.lock();
+                lock2.lock();
+
+                if (!fromAccount.isBlocked() && !toAccount.isBlocked() && fromAccount.getMoney() >= amount) {
+                    fromAccount.setMoney(fromAccount.getMoney() - amount);
+                    toAccount.setMoney(toAccount.getMoney() + amount);
+                }
+            } finally {
+                lock1.unlock();
+                lock2.unlock();
+            }
         }
 
         logger.debug("Completed transfer from {} to {} amount: {}", fromAccountNum, toAccountNum, amount);
@@ -81,6 +112,7 @@ public class Bank {
 
         System.out.println("Completed transfer from " + fromAccountNum + " to " + toAccountNum);
     }
+
 
     public long getBalance(String accountNum) {
         Account account = accounts.get(accountNum);
