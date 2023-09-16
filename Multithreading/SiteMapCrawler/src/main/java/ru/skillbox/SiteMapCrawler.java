@@ -11,20 +11,22 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.RecursiveAction;
-import java.util.concurrent.ForkJoinPool;
 
 public class SiteMapCrawler extends RecursiveAction {
-    private static final String baseUrl = "https://stackoverflow.com/";
+    static final String baseUrl = "https://stackoverflow.com/";
     private static final String outputFile = "sitemap.txt";
     private static final int MAX_DEPTH = 5; // Максимальная глубина поиска ссылок
 
     private String url;
     private int depth;
 
+
+
     public SiteMapCrawler(String url, int depth) {
         this.url = url;
         this.depth = depth;
     }
+
 
     @Override
     protected void compute() {
@@ -77,9 +79,5 @@ public class SiteMapCrawler extends RecursiveAction {
         }
     }
 
-    public static void main(String[] args) {
-        ForkJoinPool forkJoinPool = new ForkJoinPool();
-        SiteMapCrawler crawler = new SiteMapCrawler(baseUrl, 0);
-        forkJoinPool.invoke(crawler);
-    }
+
 }

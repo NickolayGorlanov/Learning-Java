@@ -1,197 +1,83 @@
 https://stackoverflow.com/
+	https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
 	https://stackoverflow.com/users/signup?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
 	https://stackoverflow.com/users/signup?ssrc=product_home
 	https://stackoverflow.com/teams/integrations/github
+		https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
 	https://stackoverflow.com/help/licensing
 	https://stackoverflow.com/legal/cookie-policy
 	https://stackoverflow.com/legal/privacy-policy
 		https://stackoverflow.com/
-			https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
-		https://stackoverflow.com/legal/
-		https://stackoverflow.com/legal/privacy-policy/collectives
-		https://stackoverflow.com/legal/privacy-policy/collectives
-	https://stackoverflow.com/users
-	https://stackoverflow.com/legal
-			https://stackoverflow.com/legal/privacy-policy/collectives
-			https://stackoverflow.com/legal/privacy-policy/collectives
-				https://stackoverflow.com/
-		https://stackoverflow.com/collectives
-		https://stackoverflow.com/legal/privacy-policy/collectives
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
 		https://stackoverflow.com/
-				https://stackoverflow.com/legal/privacy-policy/collectives
+		https://stackoverflow.com/legal/
 			https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
+			https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
+			https://stackoverflow.com/
+		https://stackoverflow.com/legal/privacy-policy/collectives
+		https://stackoverflow.com/legal
+		https://stackoverflow.com/legal/privacy-policy/collectives
+				https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
+	https://stackoverflow.com/users
 			https://stackoverflow.com/legal/privacy-policy/collectives
-		https://stackoverflow.com/questions/tagged/xml
-					https://stackoverflow.com/legal
-				https://stackoverflow.com/legal/privacy-policy/collectives
 				https://stackoverflow.com/
-			https://stackoverflow.com/legal
-					https://stackoverflow.com/legal/privacy-policy/collectives
+				https://stackoverflow.com/
+			https://stackoverflow.com/legal/privacy-policy/collectives
+			https://stackoverflow.com/legal/privacy-policy/collectives
+			https://stackoverflow.com/legal/privacy-policy/collectives
+					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
+					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
+					https://stackoverflow.com/
 				https://stackoverflow.com/legal/privacy-policy/collectives
-				https://stackoverflow.com/collectives
+				https://stackoverflow.com/legal/privacy-policy/collectives
+				https://stackoverflow.com/legal/privacy-policy/collectives
+				https://stackoverflow.com/legal/privacy-policy/collectives
+					https://stackoverflow.com/collectives
+					https://stackoverflow.com/legal/privacy-policy/collectives
 					https://stackoverflow.com/legal
 					https://stackoverflow.com/legal
-					https://stackoverflow.com/collectives
-					https://stackoverflow.com/collectives
-					https://stackoverflow.com/collectives
+					https://stackoverflow.com/users/login?ssrc=head
+					https://stackoverflow.com/legal/privacy-policy/collectives
+		https://stackoverflow.com/questions/tagged/xml
+					https://stackoverflow.com/legal/privacy-policy/collectives
+					https://stackoverflow.com/legal/privacy-policy/collectives
+					https://stackoverflow.com/
+					https://stackoverflow.com/
 					https://stackoverflow.com/legal
-			https://stackoverflow.com/help/collectives-tags
-					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/legal/contact
-					https://stackoverflow.com/legal/contact
-					https://stackoverflow.com/collectives
-				https://stackoverflow.com/legal
-					https://stackoverflow.com/legal/employer-branding-agreement
+					https://stackoverflow.com/legal
 					https://stackoverflow.com/legal
 					https://stackoverflow.com/tags
-					https://stackoverflow.com/legal/privacy-policy/collectives
-					https://stackoverflow.com/teams/integrations/slack
-					https://stackoverflow.com/
-					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
+					https://stackoverflow.com/legal
+					https://stackoverflow.com/collectives
+					https://stackoverflow.com/collectives
+					https://stackoverflow.com/collectives
+					https://stackoverflow.com/collectives
 					https://stackoverflow.com/collectives
 			https://stackoverflow.com/questions/tagged/xml
-					https://stackoverflow.com/teams/integrations/jira
 					https://stackoverflow.com/collectives
-					https://stackoverflow.com/legal
-					https://stackoverflow.com/legal/contact
-					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-enterprise
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fcollectives
-					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
-				https://stackoverflow.com/questions/77110996/beautifulsoup-ignores-double-br-tags-and-outputs-a-single-newline
 					https://stackoverflow.com/jobs/companies?so_medium=stackoverflow&so_source=SiteNav
-					https://stackoverflow.com/collectives
-					https://stackoverflow.com/legal/employer-branding-agreement
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-enterprise
+					https://stackoverflow.com/legal/contact
 					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-enterprise
-					https://stackoverflow.com/teams/integrations/okta
-					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
-					https://stackoverflow.com/questions/77110996/beautifulsoup-ignores-double-br-tags-and-outputs-a-single-newline
-					https://stackoverflow.com/feeds/question/77110996
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-enterprise
-					https://stackoverflow.com/collectives/php
+					https://stackoverflow.com/legal/terms-of-service
+					https://stackoverflow.com/legal/contact
+					https://stackoverflow.com/users/signup?ssrc=site_switcher
+					https://stackoverflow.com/legal/contact
+					https://stackoverflow.com/legal/contact
+					https://stackoverflow.com/legal/employer-branding-agreement
+					https://stackoverflow.com/legal/employer-branding-agreement
+					https://stackoverflow.com/legal/employer-branding-agreement
+					https://stackoverflow.com/legal/employer-branding-agreement
+					https://stackoverflow.com/tags
+				https://stackoverflow.com/questions/tagged/xml
 					https://stackoverflow.com/tags
 					https://stackoverflow.com/teams/integrations/slack
-					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-enterprise
-					https://stackoverflow.com/legal/trademark-guidance
-					https://stackoverflow.com/legal
-					https://stackoverflow.com/teams/integrations/jira
-					https://stackoverflow.com/questions
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-enterprise
-					https://stackoverflow.com/collectives
-					https://stackoverflow.com/legal/employer-branding-agreement
-					https://stackoverflow.com/legal/gdpr
-					https://stackoverflow.com/help
-					https://stackoverflow.com/jobs/companies?so_medium=stackoverflow&so_source=SiteNav
-					https://stackoverflow.com/legal/trademark-guidance
-					https://stackoverflow.com/collectives/nlp
 					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
-					https://stackoverflow.com/teams/integrations/okta
-					https://stackoverflow.com/legal/gdpr
-					https://stackoverflow.com/users/3266847/benjamin-w
-					https://stackoverflow.com/questions/tagged/xml
-					https://stackoverflow.com/legal/data-processing-addendum
-					https://stackoverflow.com/legal/data-processing-addendum
-					https://stackoverflow.com/legal/gdpr/subprocessors
-					https://stackoverflow.com/users/signup?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2f
+					https://stackoverflow.com/teams/integrations/slack
+					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
+					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
+					https://stackoverflow.com/teams/integrations/jira
+					https://stackoverflow.com/teams/integrations/jira
+					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-enterprise
 					https://stackoverflow.com/questions
-					https://stackoverflow.com/legal/gdpr/subprocessors
-					https://stackoverflow.com/legal/gdpr/subprocessors
-					https://stackoverflow.com/teams/integrations/microsoft-teams
-					https://stackoverflow.com/questions
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-enterprise
-					https://stackoverflow.com/questions/tagged/python
-					https://stackoverflow.com/users/login?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2f
-					https://stackoverflow.com/legal/trademark-guidance
-					https://stackoverflow.com/legal/privacy-policy
-					https://stackoverflow.com/legal/privacy-policy
-					https://stackoverflow.com/questions
-					https://stackoverflow.com/questions
-					https://stackoverflow.com/users/login?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fterms-of-service
-					https://stackoverflow.com/users/signup?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
-					https://stackoverflow.com/users/signup?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/users/6692908/khantazm
-					https://stackoverflow.com/legal/gdpr
-					https://stackoverflow.com/users/login?ssrc=question_page&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f77110996%2fbeautifulsoup-ignores-double-br-tags-and-outputs-a-single-newline%23new-answer
-					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-basic-business
-					https://stackoverflow.com/legal/data-processing-addendum
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-business
-					https://stackoverflow.com/collectives/ci-cd
-					https://stackoverflow.com/teams/integrations/microsoft-teams
-					https://stackoverflow.com/users
-					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-basic-business
-					https://stackoverflow.com/help/licensing
-					https://stackoverflow.com/legal/privacy-policy/teams-enterprise
-					https://stackoverflow.com/legal/privacy-policy
-					https://stackoverflow.com/users/signup?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f77110996%2fbeautifulsoup-ignores-double-br-tags-and-outputs-a-single-newline
-					https://stackoverflow.com/users/signup?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
-					https://stackoverflow.com/teams/integrations/github
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-business
-					https://stackoverflow.com/questions/ask
-					https://stackoverflow.com/legal/cookie-policy
-					https://stackoverflow.com/legal/privacy-policy/teams-enterprise
-					https://stackoverflow.com/users/signup?ssrc=product_home
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-business
-					https://stackoverflow.com/users
-					https://stackoverflow.com/questions
-				https://stackoverflow.com/collectives
-					https://stackoverflow.com/legal/privacy-policy
-					https://stackoverflow.com/legal/cookie-policy
-					https://stackoverflow.com/legal/privacy-policy/teams-enterprise
-					https://stackoverflow.com/help/licensing
-					https://stackoverflow.com/legal/privacy-policy/integrations/slack/teams-basic-business
-					https://stackoverflow.com/questions/1301346/what-is-the-meaning-of-single-and-double-underscore-before-an-object-name
-					https://stackoverflow.com/legal
-					https://stackoverflow.com/teams/integrations/github
-					https://stackoverflow.com/legal/privacy-policy
-					https://stackoverflow.com/legal/privacy-policy/integrations/jira/teams-business
-					https://stackoverflow.com/legal/cookie-policy
-					https://stackoverflow.com/legal/privacy-policy/teams-enterprise
-					https://stackoverflow.com/users/login?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/questions
-					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-basic-business
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/users/login?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/legal/content-policy
-					https://stackoverflow.com/conduct
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/users/signup?ssrc=product_home
-					https://stackoverflow.com/help/collectives-tags
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fcollectives
-					https://stackoverflow.com/collectives/twilio
-					https://stackoverflow.com/
-					https://stackoverflow.com/collectives/php
-					https://stackoverflow.com/
-					https://stackoverflow.com/q/77110996
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fterms-of-service
-					https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-basic-business
-					https://stackoverflow.com/legal/api-terms-of-use
-					https://stackoverflow.com/collectives/nlp
-					https://stackoverflow.com/legal/api-terms-of-use
-					https://stackoverflow.com/legal/privacy-policy/teams-free-basic-business
-					https://stackoverflow.com/tags
-					https://stackoverflow.com/help/collectives
-					https://stackoverflow.com/users/3266847/benjamin-w
-					https://stackoverflow.com/
-					https://stackoverflow.com/legal/cookie-policy
-					https://stackoverflow.com/
-					https://stackoverflow.com/tags
-				https://stackoverflow.com/jobs/companies?so_medium=stackoverflow&so_source=SiteNav
-					https://stackoverflow.com/jobs/companies?so_medium=stackoverflow&so_source=SiteNav
-					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/collectives
-					https://stackoverflow.com/legal/terms-of-service
-					https://stackoverflow.com/jobs/companies?so_medium=stackoverflow&so_source=SiteNav
-					https://stackoverflow.com/users/login?ssrc=site_switcher&returnurl=https%3a%2f%2fstackoverflow.com%2fjobs%2fcompanies%3fso_medium%3dstackoverflow%26so_source%3dSiteNav
-					https://stackoverflow.com/legal/privacy-policy/integrations
-					https://stackoverflow.com/questions
-					https://stackoverflow.com/legal/api-terms-of-use
-					https://stackoverflow.com/users/signup?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2flegal%2fprivacy-policy%2fcollectives
-					https://stackoverflow.com/legal/api-terms-of-use
-					https://stackoverflow.com/jobs/companies?pg=11
-					https://stackoverflow.com/jobs/companies?tl=unity-game-engine
+					https://stackoverflow.com/users/login?ssrc=site_switcher
+					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-enterprise
+					https://stackoverflow.com/legal/privacy-policy/integrations/ms-teams/teams-enterprise
