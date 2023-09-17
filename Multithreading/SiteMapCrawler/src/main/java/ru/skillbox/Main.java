@@ -6,8 +6,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static ru.skillbox.SiteMapCrawler.baseUrl;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
@@ -15,8 +15,10 @@ public class Main {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
 
+        Set<String> visitedUrls = new HashSet<>(); // Создаем множество посещенных URL
+
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        SiteMapCrawler crawler = new SiteMapCrawler(baseUrl, 0, startTime);
+        SiteMapCrawler crawler = new SiteMapCrawler("https://skillbox.com/", 0, startTime, visitedUrls); // Обновляем передачу URL и множества
         forkJoinPool.invoke(crawler);
 
         ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
@@ -24,7 +26,7 @@ public class Main {
             // Прерываем выполнение всех задач в пуле
             forkJoinPool.shutdownNow();
             try {
-                // Ждем до 1 минуты для завершения всех потоков
+
                 if (!forkJoinPool.awaitTermination(1, TimeUnit.MINUTES)) {
                     logger.log(Level.SEVERE, "Timeout: Not all tasks completed.");
                 }

@@ -1,5 +1,6 @@
 package ru.skillbox;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,33 +14,40 @@ import java.util.Set;
 import java.util.concurrent.RecursiveAction;
 
 public class SiteMapCrawler extends RecursiveAction {
-    static final String baseUrl = "https://stackoverflow.com/";
+    private static final int MAX_DEPTH = 2; // Максимальная глубина поиска ссылок
+    private static final long TIMEOUT = 120000; // Максимальное время выполнения в миллисекундах
     private static final String outputFile = "sitemap.txt";
-    private static final int MAX_DEPTH = 5; // Максимальная глубина поиска ссылок
 
     private final String url;
     private final int depth;
     private final long startTime;
+    private final Set<String> visitedUrls; // Храним посещенные URL
 
-    public SiteMapCrawler(String url, int depth, long startTime) {
+    public SiteMapCrawler(String url, int depth, long startTime, Set<String> visitedUrls) {
         this.url = url;
         this.depth = depth;
         this.startTime = startTime;
+        this.visitedUrls = visitedUrls;
     }
 
     @Override
     protected void compute() {
-        if (depth > MAX_DEPTH || System.currentTimeMillis() - startTime > 120000) {
+        if (depth > MAX_DEPTH || System.currentTimeMillis() - startTime > TIMEOUT || visitedUrls.contains(url)) {
             return;
         }
 
-        try {
-            Document doc = Jsoup.connect(url).get();
-            Set<String> childUrls = new HashSet<>();
+        visitedUrls.add(url); // Добавляем посещенный URL в список
 
+        try {
+            Connection connection = Jsoup.connect(url);
+            connection.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+            Document doc = connection.get();
+
+            Set<String> childUrls = new HashSet<>();
             Elements links = doc.select("a[href]");
+
             for (Element link : links) {
-                String childUrl = link.attr("abs:href");
+                String childUrl = link.absUrl("href");
                 if (isValidUrl(childUrl)) {
                     childUrls.add(childUrl);
                 }
@@ -51,7 +59,7 @@ public class SiteMapCrawler extends RecursiveAction {
                 SiteMapCrawler[] tasks = new SiteMapCrawler[childUrls.size()];
                 int i = 0;
                 for (String childUrl : childUrls) {
-                    tasks[i] = new SiteMapCrawler(childUrl, depth + 1, startTime);
+                    tasks[i] = new SiteMapCrawler(childUrl, depth + 1, startTime, visitedUrls);
                     i++;
                 }
 
@@ -67,7 +75,7 @@ public class SiteMapCrawler extends RecursiveAction {
     }
 
     private boolean isValidUrl(String url) {
-        return url.startsWith(baseUrl) && !url.contains("#");
+        return url.startsWith("https://skillbox.com/") && !url.contains("#");
     }
 
     private void writeToFile(String url, int depth) {
