@@ -17,20 +17,19 @@ public class SiteMapCrawler extends RecursiveAction {
     private static final String outputFile = "sitemap.txt";
     private static final int MAX_DEPTH = 5; // Максимальная глубина поиска ссылок
 
-    private String url;
-    private int depth;
+    private final String url;
+    private final int depth;
+    private final long startTime;
 
-
-
-    public SiteMapCrawler(String url, int depth) {
+    public SiteMapCrawler(String url, int depth, long startTime) {
         this.url = url;
         this.depth = depth;
+        this.startTime = startTime;
     }
-
 
     @Override
     protected void compute() {
-        if (depth > MAX_DEPTH) {
+        if (depth > MAX_DEPTH || System.currentTimeMillis() - startTime > 120000) {
             return;
         }
 
@@ -52,15 +51,18 @@ public class SiteMapCrawler extends RecursiveAction {
                 SiteMapCrawler[] tasks = new SiteMapCrawler[childUrls.size()];
                 int i = 0;
                 for (String childUrl : childUrls) {
-                    tasks[i] = new SiteMapCrawler(childUrl, depth + 1);
+                    tasks[i] = new SiteMapCrawler(childUrl, depth + 1, startTime);
                     i++;
                 }
+
+                // Вызывайте invokeAll только для созданных задач
                 invokeAll(tasks);
             }
         } catch (IOException e) {
             System.err.println("Error fetching URL: " + url);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt(); // Переустановка флага прерывания
+            System.err.println("Thread interrupted: " + e.getMessage());
         }
     }
 
@@ -78,6 +80,4 @@ public class SiteMapCrawler extends RecursiveAction {
             System.err.println("Error writing to file: " + e.getMessage());
         }
     }
-
-
 }
