@@ -6,17 +6,16 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.concurrent.RecursiveAction;
+import java.util.concurrent.RecursiveTask;
 
-public class SiteMapCrawler extends RecursiveAction {
-    private static final int MAX_DEPTH = 2; // Максимальная глубина поиска ссылок
+public class SiteMapCrawler extends RecursiveTask<String> {
+    private static final int MAX_DEPTH = 5; // Максимальная глубина поиска ссылок
     private static final long TIMEOUT = 120000; // Максимальное время выполнения в миллисекундах
-    private static final String outputFile = "sitemap.txt";
 
     private final String url;
     private final int depth;
@@ -31,9 +30,9 @@ public class SiteMapCrawler extends RecursiveAction {
     }
 
     @Override
-    protected void compute() {
+    protected String compute() {
         if (depth > MAX_DEPTH || System.currentTimeMillis() - startTime > TIMEOUT || visitedUrls.contains(url)) {
-            return;
+            return "";
         }
 
         visitedUrls.add(url); // Добавляем посещенный URL в список
@@ -54,38 +53,34 @@ public class SiteMapCrawler extends RecursiveAction {
                 Thread.sleep(100);
             }
 
-            writeToFile(url, depth);
+            StringBuilder result = new StringBuilder();
+            result.append(url).append("\n");
+
             if (!childUrls.isEmpty()) {
-                SiteMapCrawler[] tasks = new SiteMapCrawler[childUrls.size()];
-                int i = 0;
+                List<SiteMapCrawler> tasks = new ArrayList<>();
                 for (String childUrl : childUrls) {
-                    tasks[i] = new SiteMapCrawler(childUrl, depth + 1, startTime, visitedUrls);
-                    i++;
+                    SiteMapCrawler task = new SiteMapCrawler(childUrl, depth + 1, startTime, visitedUrls);
+                    task.fork();
+                    tasks.add(task);
                 }
 
-                // Вызывайте invokeAll только для созданных задач
-                invokeAll(tasks);
+                for (SiteMapCrawler task : tasks) {
+                    result.append(task.join());
+                }
             }
+
+            return result.toString();
         } catch (IOException e) {
             System.err.println("Error fetching URL: " + url);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Переустановка флага прерывания
             System.err.println("Thread interrupted: " + e.getMessage());
         }
+
+        return "";
     }
 
     private boolean isValidUrl(String url) {
-        return url.startsWith("https://skillbox.com/") && !url.contains("#");
-    }
-
-    private void writeToFile(String url, int depth) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
-            for (int i = 0; i < depth; i++) {
-                writer.write("\t");
-            }
-            writer.write(url + "\n");
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
-        }
+        return url.startsWith("https://skillbox.ru/") && !url.contains("#");
     }
 }
