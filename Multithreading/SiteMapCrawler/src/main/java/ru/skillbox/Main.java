@@ -1,50 +1,46 @@
 package ru.skillbox;
 
-import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main {
-    private static final Logger logger = Logger.getLogger(Main.class.getName());
-
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
+        // Создаем список для всех ссылок
+        ArrayList<String> allLinks = new ArrayList<>();
 
-        Set<String> visitedUrls = new HashSet<>(); // Создаем множество посещенных URL
+        // Создаем экземпляр SiteMapCrawler и передаем базовый URL и список ссылок
+        SiteMapCrawler crawler = new SiteMapCrawler("https://lenta.ru/", allLinks);
 
+        // Создаем ForkJoinPool
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        SiteMapCrawler crawler = new SiteMapCrawler("https://skillbox.ru/", 0, startTime, visitedUrls); // Обновляем передачу URL и множества
+
+        // Получаем результат выполнения SiteMapCrawler
         String siteMap = forkJoinPool.invoke(crawler);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("sitemap.txt"))) {
+        try {
+            FileWriter writer = new FileWriter(new File("site_map.txt"));
             writer.write(siteMap);
+            writer.close();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Error writing to file: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
-        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
-        executorService.schedule(() -> {
-            // Прерываем выполнение всех задач в пуле
-            forkJoinPool.shutdownNow();
-            try {
-                if (!forkJoinPool.awaitTermination(1, TimeUnit.MINUTES)) {
-                    logger.log(Level.SEVERE, "Timeout: Not all tasks completed.");
-                }
-            } catch (InterruptedException e) {
-                logger.log(Level.SEVERE, "Error waiting for tasks to complete: " + e.getMessage());
-            } finally {
-                // Завершаем выполнение ScheduledExecutorService
-                executorService.shutdown();
-                System.exit(0); // Выходим из программы после завершения
+        // Завершаем выполнение ForkJoinPool
+        forkJoinPool.shutdown();
+
+        // Ждем завершения всех задач
+        try {
+            if (!forkJoinPool.awaitTermination(1, TimeUnit.MINUTES)) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Timeout: Not all tasks completed.");
             }
-        }, 1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Error waiting for tasks to complete: " + e.getMessage());
+        }
     }
 }
