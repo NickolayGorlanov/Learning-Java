@@ -1,10 +1,10 @@
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Voter {
 
     private String name;
-    private Date birthDay;
+    private Date birthDay; // Вернуто обратно к Date
 
     public Voter(String name, Date birthDay) {
         this.name = name;
@@ -13,17 +13,17 @@ public class Voter {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Voter voter = (Voter) obj;
         return name.equals(voter.name) && birthDay.equals(voter.birthDay);
     }
 
     @Override
     public int hashCode() {
-        long code = name.hashCode() + birthDay.hashCode();
-        while (code > Integer.MAX_VALUE) {
-            code = code / 10;
-        }
-        return (int) code;
+        int result = name.hashCode();
+        result = 31 * result + birthDay.hashCode();
+        return result;
     }
 
     public String toString() {

@@ -13,7 +13,7 @@ public class WorkTime {
     }
 
     public void addVisitTime(long visitTime) {
-        Date visit = new Date(visitTime);
+        Date visit = new Date(String.valueOf(visitTime));
         TimePeriod newPeriod = new TimePeriod(visit, visit);
         for (TimePeriod period : periods) {
             if (period.compareTo(newPeriod) == 0) {

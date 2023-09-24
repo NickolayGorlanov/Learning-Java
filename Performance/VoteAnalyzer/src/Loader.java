@@ -13,13 +13,13 @@ import java.util.HashMap;
 public class Loader {
 
     private static SimpleDateFormat birthDayFormat = new SimpleDateFormat("yyyy.MM.dd");
-    private static SimpleDateFormat visitDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+    static SimpleDateFormat visitDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
-    private static HashMap<Integer, WorkTime> voteStationWorkTimes = new HashMap<>();
+    static HashMap<Integer, WorkTime> voteStationWorkTimes = new HashMap<>();
     private static HashMap<Voter, Integer> voterCounts = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
-        String fileName = "res/data-1M.xml";
+        String fileName = "res/data-1572M.xml";
 
         parseFile(fileName);
 
@@ -73,13 +73,17 @@ public class Loader {
             NamedNodeMap attributes = node.getAttributes();
 
             Integer station = Integer.parseInt(attributes.getNamedItem("station").getNodeValue());
-            Date time = visitDateFormat.parse(attributes.getNamedItem("time").getNodeValue());
+            String timeStr = attributes.getNamedItem("time").getNodeValue();
+            Date time = visitDateFormat.parse(timeStr);
+
             WorkTime workTime = voteStationWorkTimes.get(station);
             if (workTime == null) {
                 workTime = new WorkTime();
                 voteStationWorkTimes.put(station, workTime);
             }
-            workTime.addVisitTime(time.getTime());
+            workTime.addVisitTime(time.getTime()); // Преобразуем Date в миллисекунды
         }
     }
+
+
 }
