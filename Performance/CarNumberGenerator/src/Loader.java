@@ -6,10 +6,12 @@ import java.util.concurrent.Executors;
 
 public class Loader {
 
+    private static final StringBuilder stringBuilder = new StringBuilder(); // Поле для StringBuilder
+
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
 
-        int threadCount = 4; // Количество потоков
+        int threadCount = Runtime.getRuntime().availableProcessors(); // Определяем количество доступных ядер
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
 
         try {
@@ -18,7 +20,7 @@ public class Loader {
             BufferedWriter[] writers = new BufferedWriter[fileCount];
 
             for (int i = 0; i < fileCount; i++) {
-                writers[i] = new BufferedWriter(new FileWriter("res/numbers_" + i + ".txt"));
+                writers[i] = new BufferedWriter(new FileWriter("C:\\Users\\New\\IdeaProjects\\Performance\\CarNumberGenerator\\res\\numbers_" + i + ".txt"));
             }
 
             for (int number = 1; number < 1000; number++) {
@@ -26,8 +28,7 @@ public class Loader {
                 for (char firstLetter : letters) {
                     for (char secondLetter : letters) {
                         for (char thirdLetter : letters) {
-                            String carNumber = firstLetter + padNumber(number, 3) +
-                                    secondLetter + thirdLetter + padNumber(regionCode, 2);
+                            String carNumber = formatCarNumber(firstLetter, number, secondLetter, thirdLetter, regionCode);
 
                             // Выбираем случайный индекс файла и записываем в него
                             int randomFileIndex = (int) (Math.random() * fileCount);
@@ -52,8 +53,14 @@ public class Loader {
         System.out.println((System.currentTimeMillis() - start) + " ms");
     }
 
-    private static String padNumber(int number, int numberLength) {
-        return String.format("%0" + numberLength + "d", number);
+    private static String formatCarNumber(char firstLetter, int number, char secondLetter, char thirdLetter, int regionCode) {
+        stringBuilder.setLength(0); // Очищаем StringBuilder
+        stringBuilder.append(firstLetter);
+        stringBuilder.append(String.format("%03d", number));
+        stringBuilder.append(secondLetter);
+        stringBuilder.append(thirdLetter);
+        stringBuilder.append(String.format("%02d", regionCode));
+        return stringBuilder.toString();
     }
 
     private static void writeToFileWithBuffer(BufferedWriter writer, String carNumber) {
