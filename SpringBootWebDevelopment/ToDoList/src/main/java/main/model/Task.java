@@ -1,12 +1,12 @@
 package main.model;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity // Объявляем класс как сущность
 public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Указываем, что это поле будет использоваться как первичный ключ
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Указываем стратегию генерации ключа
     private Long id;
 
     @Column(nullable = false)
