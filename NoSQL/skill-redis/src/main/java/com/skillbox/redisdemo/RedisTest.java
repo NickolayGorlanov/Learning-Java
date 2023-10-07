@@ -55,20 +55,9 @@ public class RedisTest {
             Thread.sleep(SLEEP);
         }
 
-        // Уберем остановку контейнера Redis
-        // stopRedisContainer();
+
     }
 
-    /*
-    private static void startRedisContainer() {
-        //  код для запуска Docker-контейнера Redis
-    }
-    */
 
-    /*
-    private static void stopRedisContainer() {
-        //  код для остановки Docker-контейнера Redis
-    }
-    */
 }
 
